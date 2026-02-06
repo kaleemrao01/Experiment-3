@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Class Hierarchy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+        }
+
+        .age {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .extra {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Person Class Hierarchy</h1>
+
+    <div class="container" id="output"></div>
+
+    <script>
+        // Base class
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            intro() {
+                return `Hello, my name is ${this.name}.`;
+            }
+
+            render() {
+                return `
+                    <div class="card">
+                        <h2>${this.name} (Person)</h2>
+                        <div class="age">Age: ${this.age}</div>
+                        <div class="intro">${this.intro()}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Student class (inherits Person)
+        class Student extends Person {
+            constructor(name, age, major) {
+                super(name, age);
+                this.major = major;
+            }
+
+            intro() {
+                return `Hello, my name is ${this.name} and I'm studying ${this.major}.`;
+            }
+
+            render() {
+                return `
+                    <div class="card">
+                        <h2>${this.name} (Student)</h2>
+                        <div class="age">Age: ${this.age}</div>
+                        <div class="intro">${this.intro()}</div>
+                        <div class="extra">Major: ${this.major}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Teacher class (inherits Person)
+        class Teacher extends Person {
+            constructor(name, age, subject) {
+                super(name, age);
+                this.subject = subject;
+            }
+
+            intro() {
+                return `Hello, my name is ${this.name} and I teach ${this.subject}.`;
+            }
+
+            render() {
+                return `
+                    <div class="card">
+                        <h2>${this.name} (Teacher)</h2>
+                        <div class="age">Age: ${this.age}</div>
+                        <div class="intro">${this.intro()}</div>
+                        <div class="extra">Teaching: ${this.subject}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Creating objects
+        const person = new Person("Alex Johnson", 30);
+        const student = new Student("Emma Watson", 20, "Computer Science");
+        const teacher = new Teacher("Dr. James Wilson", 45, "Mathematics");
+
+        // Displaying output
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML =
+            person.render() +
+            student.render() +
+            teacher.render();
+    </script>
+
+</body>
+</html>
